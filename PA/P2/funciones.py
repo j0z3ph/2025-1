@@ -24,11 +24,13 @@ def suma(a:int=8, b:int = 10) -> int:
         int: La suma
     """
     return a + b
-    
-saluda()
-imprime("Adios!! :'(")
 
-la_suma = lambda a,b: a+b
+if __name__ == "__main__":
+    saluda()
+    imprime("Adios!! :'(")
 
-imprime(f"La suma {la_suma(4,5)}")
-imprime(f"La suma {suma_chida(1,2,3,4,5,6,7,8,9,12)}")
+    la_suma = lambda a,b: a+b
+
+    imprime(f"La suma {la_suma(4,5)}")
+    imprime(f"La suma {suma_chida(1,2,3,4,5,6,7,8,9,12)}")
+
