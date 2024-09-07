@@ -1,7 +1,7 @@
 /**
  * @file programa.c
  * @author Jose Luis Cruz (jlcruz@ipn.mx)
- * @brief Mi primer programa en C
+ * @brief Mi primer programa en C que no hace NADA
  * @version 0.1
  * @date 2024-09-04
  * 
@@ -12,7 +12,13 @@
 
 int main()
 {
-    /* code */
+    //putc(getc(stdin), stdout);
+    //putc(getc(stdin), stdout);
+    //putc(getc(stdin), stdout);
+    
+    char texto[1];
+    gets(texto);
+    puts(texto);
     return 0;
 }
 
