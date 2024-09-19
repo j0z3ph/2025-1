@@ -1,9 +1,14 @@
-class Figura:
+from abc import ABCMeta
+from abc import abstractmethod
+
+class Figura(metaclass=ABCMeta):
+    @abstractmethod
     def area(sefl):
-        raise NotImplementedError()
+        pass
     
 class Cuadrado(Figura):
-    pass
+    def area(sefl):
+        return 0
 
 c1 = Cuadrado()
 
