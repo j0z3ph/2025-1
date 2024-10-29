@@ -22,11 +22,9 @@ int main()
     cin >> variable;
     cout << "El cuadrado de " << variable << " es "
          << variable * variable << "." << endl;
-    getc(stdin);
+    while (getc(stdin) != '\n');
     getline(cin, nombre);
     cout << nombre;
-
-
 
     return 0;
 }
