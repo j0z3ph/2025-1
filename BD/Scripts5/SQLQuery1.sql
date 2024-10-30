@@ -27,19 +27,25 @@ order by VentaTotal asc
 select t2.staff_id, 
 t2.first_name, t2.last_name, 
 (t3.first_name + ' ' + t3.last_name) as ManagerName,
-count(t1.order_id) as NoVentas
+count(t1.order_id) as NoVentas,
+year(t1.order_date) as AnioVenta
 from sales.orders t1
 join sales.staffs t2
 on t1.staff_id = t2.staff_id
 join sales.staffs t3
 on t2.manager_id = t3.staff_id
 group by t2.staff_id, t2.first_name, t2.last_name,
-(t3.first_name + ' ' + t3.last_name)
-order by NoVentas desc
+(t3.first_name + ' ' + t3.last_name),
+year(t1.order_date)
+order by AnioVenta, NoVentas desc
 
 select * 
 from sales.staffs t1
 left join sales.staffs t2
 on t1.manager_id = t2.staff_id
 
+select year(order_date) 
+from sales.orders
+group by year(order_date)
 
+select year(getdate())
