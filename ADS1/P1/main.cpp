@@ -24,7 +24,7 @@ int main()
 
     cout << "El doble de " << variable
          << " es " << 2 * variable << "." << endl;
-    getc(stdin);
+    while (getc(stdin) != '\n');
     getline(cin, nombre);
     cout << nombre << endl;
 
