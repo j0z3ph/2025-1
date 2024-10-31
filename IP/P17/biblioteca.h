@@ -45,5 +45,13 @@ void imprime(int arrg[], int n);
  */
 void encuentraElMasGrande(int arr[], int n);
 
+/**
+ * @brief Cuenta el numero de digitos que 
+ * tiene un entero
+ * 
+ * @param numero El entero a evaluar
+ * @return int El numero de digitos del entero
+ */
+int cuentaDigitos(int numero);
 
 #endif
