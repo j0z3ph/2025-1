@@ -79,3 +79,14 @@ void encuentraElMasGrande(int arr[], int n)
     printf("\nEl mas grande es: %i\n", theBigOne);
 }
 
+int cuentaDigitos(int numero)
+{
+    static int contador = 0;
+    if (numero)
+    {
+        numero /= 10;
+        contador++;
+        cuentaDigitos(numero);
+    }
+    return contador;
+}
