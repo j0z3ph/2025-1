@@ -28,8 +28,8 @@ def recv_msg(sock):
             break
 
 if __name__ == "__main__":
-    host = 'localhost'  # Nombre del server
-    port = 65535
+    host = 'tequila.debugueando.com'  # Nombre del server
+    port = 80
     BUFFER_SIZE = 1024  # Usamos un número pequeño para tener una respuesta rápida
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.connect((host, port))
