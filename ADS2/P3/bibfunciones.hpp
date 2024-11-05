@@ -21,9 +21,19 @@ namespace telematica
      *
      * @param a Primer entero
      * @param b Segundo entero
+     * @param c Tercero entero
      * @return int La suma de a y b
      */
-    int suma(int a, int b);
+    int suma(int a, int b=0, int c=0);
+
+    /**
+     * @brief Esta funcion suma dos enteros
+     *
+     * @param a Primer entero
+     * @param b Segundo entero
+     * @return int La suma de a y b
+     */
+    float suma(float a, float b);
 
     /**
      * @brief Imprime un entero

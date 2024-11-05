@@ -6,7 +6,7 @@
  * @date 2024-11-04
  *
  * @copyright Copyright (c) 2024
- *
+ *  
  */
 #include <iostream>
 // Definiciones de funciones
@@ -14,10 +14,15 @@
 namespace telematica
 {
 
-    int suma(int a, int b)
+    
+    float suma(float a, float b)
     {
-        int resultado = a + b;
+        float resultado = a + b;
         return resultado;
+    }
+
+    int suma(int a, int b, int c) {
+        return a + b + c;
     }
 
     void imprime(int entero)
@@ -26,3 +31,4 @@ namespace telematica
     }
 
 } // namespace telematica
+ 

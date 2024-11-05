@@ -23,9 +23,14 @@ int main()
     cin >> a;
     cout << "Ahora ingrese otro numero: ";
     cin >> b;
-
+ 
     cout << "La suma de " << a << " mas " << b << " es " << suma(a, b) << endl;
     imprime(suma(a, b));
+
+    cout << endl << suma(6.7f, 8.8f);
+
+    cout << endl << suma(4,5,6);
+
 
     return 0;
 }
