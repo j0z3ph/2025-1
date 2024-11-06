@@ -49,6 +49,7 @@ class MainWindow(QMainWindow, Ui_Messenger):
         self.coneccion = None
         self.btnSend.clicked.connect(self.mensaje_saliente)
         self.setWindowTitle("Messenger - Desconectado")
+        self.txtSend.returnPressed.connect(self.mensaje_saliente)
         
     def mensaje_saliente(self):
         str = self.txtSend.text()
@@ -76,6 +77,7 @@ class MainWindow(QMainWindow, Ui_Messenger):
             
     def mensage_entrante(self, mensaje):
         self.txtMsgs.setPlainText(self.txtMsgs.toPlainText() + mensaje)
+        self.txtMsgs.verticalScrollBar().setValue(self.txtMsgs.verticalScrollBar().maximum())
         
 
 class MiDialogo(QDialog, Ui_Dialog):

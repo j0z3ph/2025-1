@@ -17,6 +17,8 @@ def clientthread(conn, addr):
                 # Mensajes especiales (comandos)
                 if msg.startswith('<name>'):
                     setName(conn, msg.removeprefix('<name>'))
+                elif msg.startswith('<command>'):
+                    broadcast(msg + '\n', conn)
                 else:
                     # Reenviamos el mensaje recibido a todos los demás clientes.
                     message_to_send = f"<{getName(conn)}> {message.decode('utf-8')}\n"
