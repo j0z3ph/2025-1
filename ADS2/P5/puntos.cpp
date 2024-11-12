@@ -1,9 +1,9 @@
 /**
- * @file operadores.cpp
+ * @file puntos.cpp
  * @author Jose Luis Cruz (jlcruz@ipn.mx)
- * @brief Mi primer sobre carga de operadores
+ * @brief Mi segunda clase :>
  * @version 0.1
- * @date 2024-11-08
+ * @date 2024-11-11
  *
  * @copyright Copyright (c) 2024
  *
@@ -25,11 +25,15 @@ public:
         this->y = y;
     }
 
+    // Getters
     int getX() { return this->x; }
     int getY() { return this->y; }
+
+    // Setters
     void setX(int x) { this->x = x; }
     void setY(int y) { this->y = y; }
 
+    // Sobrecarga de operadores
     void operator++()
     {
         this->x++;
@@ -42,26 +46,27 @@ public:
     }
 };
 
-Punto operator+(Punto &a, Punto &b)
-{
-    Punto c(0, 0);
-    c.setX(a.getX() + b.getX());
-    c.setY(a.getY() + b.getY());
-    return c;
-}
 ostream &operator<<(ostream &os, Punto &p)
 {
     os << "(" << p.getX() << "," << p.getY() << ")";
     return os;
 }
 
+Punto operator+(Punto &p1, Punto &p2)
+{
+    Punto res(0, 0);
+    res.setX(p1.getX() + p2.getX());
+    res.setY(p1.getY() + p2.getY());
+    return res;
+}
+
 int main()
 {
-    Punto a(4, 5), b(5, 6);
-    Punto c = a + b;
-    ++a;
-    a++;
-    cout << c << endl;
+    Punto p1(4, 5), p2(5, 6);
+    ++p1;
+    p1++;
+    Punto p3 = p1 + p2;
+    cout << p3;
 
     return 0;
 }

@@ -12,15 +12,6 @@
 
 using namespace std;
 
-struct Rect {
-    int base;
-    int altura;
-
-    int area() {
-        return base * altura;
-    }
-};
-
 class Rectangulo {
     private:
     int base;
@@ -28,11 +19,18 @@ class Rectangulo {
 
     public:
     // Contructores
-    Rectangulo() {
+    /*Rectangulo() {
         this->altura = 0;
         this->base = 0;
-    }
+    }*/
 
+    Rectangulo(int altura, int base) {
+        this->altura = altura;
+        this->base = base;
+    }
+    ~Rectangulo() {
+        cout << "Ya me mori" << endl;
+    }
 
     // GETTERS
     int getBase() {
@@ -59,14 +57,9 @@ class Rectangulo {
 
 int main()
 {
-    struct Rect rect;
-    rect.altura = 10;
-    rect.base = 11;
-
-    Rectangulo rect1;
+    Rectangulo rect1(5,6), rect2(6,7);
     
-    //rect1.setAltura(10);
-    //rect1.setBase(10);
+
     cout << rect1.area();
 
     return 0;
