@@ -94,7 +94,7 @@ void Task2code(void* pvParameters) {
         Serial.println(str);
       }
     }
-    delay(100);
+    //delay(100);
   }
 }
 
