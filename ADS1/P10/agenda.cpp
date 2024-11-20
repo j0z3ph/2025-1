@@ -9,101 +9,13 @@
  *
  */
 #include <iostream>
+#include <vector>
 #include "tools.hpp"
+#include "contactolib.hpp"
 
 using namespace std;
 using namespace tools;
-
-class Contacto
-{
-private:
-    string nombre;
-    string numero;
-    string correo;
-    string apodo;
-
-public:
-    Contacto()
-    {
-        this->nombre = this->apodo = this->correo = this->numero = "";
-    }
-    Contacto(string nombre, string numero,
-             string apodo = "", string correo = "")
-    {
-        this->nombre = nombre;
-        this->numero = numero;
-        this->correo = correo;
-        this->apodo = apodo;
-    }
-
-    // getters
-    string getNombre() { return this->nombre; }
-    string getApodo() { return this->apodo; }
-    string getNumero() { return this->numero; }
-    string getCorreo() { return this->correo; }
-
-    // setters
-    void setNombre(string nombre) { this->nombre = nombre; }
-    void setApodo(string apodo) { this->apodo = apodo; }
-    void setNumero(string numero) { this->numero = numero; }
-    void setCorreo(string correo) { this->correo = correo; }
-};
-
-class Agenda
-{
-private:
-    Contacto *_lista;
-    int cont;
-
-public:
-    Agenda()
-    {
-        this->_lista = nullptr;
-        this->cont = 0;
-    }
-    ~Agenda()
-    {
-        if (this->_lista != nullptr)
-            delete[] this->_lista;
-    }
-
-    // Metodos
-    int size() { return this->cont; }
-    void agregar(Contacto contacto)
-    {
-        Contacto *tmp = new Contacto[cont + 1];
-        if (cont > 0)
-        {
-            // Si ya hay contactos
-            memcpy(tmp, this->_lista, sizeof(Contacto) * cont);
-            delete[] this->_lista;
-            this->_lista = tmp;
-        }
-        else
-        {
-            // Si no hay contactos
-            this->_lista = tmp;
-        }
-        // Copiamos el contacto a la lista
-        memcpy(this->_lista + cont, &contacto, sizeof(Contacto));
-        cont++; // Sumamos uno
-    }
-
-    string lista()
-    {
-        string cadena = "";
-        for (int i = 0; i < cont; i++)
-        {
-            cadena = cadena.append(to_string(i + 1));
-            cadena = cadena.append(" - ");
-            cadena = cadena.append((*(this->_lista + i)).getNombre());
-            cadena = cadena.append(" - ");
-            cadena = cadena.append((*(this->_lista + i)).getNumero());
-            cadena = cadena.append("\n");
-        }
-        return cadena;
-    }
-};
+using namespace agenda;
 
 int main()
 {
@@ -118,13 +30,29 @@ int main()
 
     do
     {
-
         opc = showMenu(opciones, "AGENDA DE CONTACTOS");
 
         if (opc == 0)
         {
-            Contacto c("Nombre " + to_string(cont++), "Numero");
+            string nombre;
+            string numero;
+            string correo;
+            string apodo;
+            cout << "Ingrese el nombre: ";
+            getline(cin, nombre);
+            cout << "Ingrese el numero: ";
+            getline(cin, numero);
+            cout << "Ingrese el correo: ";
+            getline(cin, correo);
+            cout << "Ingrese el apodo: ";
+            getline(cin, apodo);
+            Contacto c(nombre, numero, apodo, correo);
             agenda.agregar(c);
+        }
+        if (opc == 1)
+        {
+            int contact = showMenu(agenda.getLista(), "Seleccione un contacto");
+            cout << agenda.llamarContacto(contact) << endl;
         }
         if (opc == 2)
         {
