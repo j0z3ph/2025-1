@@ -1,0 +1,3 @@
+CREATE LOGIN elprofe WITH PASSWORD = 'P4$$w0Rd.';
+
+ALTER LOGIN elprofe DISABLE;
