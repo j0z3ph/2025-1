@@ -1,10 +1,19 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "contactolib.hpp"
 
 using namespace std;
 using namespace agenda;
+
+Contacto::Contacto()
+{
+    this->nombre = "";
+    this->numero = "";
+    this->correo = "";
+    this->apodo = "";
+}
 
 Contacto::Contacto(string nombre, string numero,
                    string apodo, string correo)
@@ -42,15 +51,17 @@ Agenda::~Agenda()
 int Agenda::size() { return this->cont; }
 void Agenda::agregar(Contacto contacto)
 {
-    void *mem = operator new[]((sizeof(Contacto) * cont) + sizeof(Contacto));
-    // Contacto *tmp = new Contacto[cont + 1];
-    Contacto *tmp = static_cast<Contacto *>(mem);
+    //void *mem = operator new[]((sizeof(Contacto) * cont) + sizeof(Contacto));
+     Contacto *tmp = new Contacto[cont + 1];
+    //Contacto *tmp = static_cast<Contacto *>(mem);
     // Contacto *tmp = (Contacto *)mem;
     if (cont > 0)
     {
         // Si ya hay contactos
-        memcpy(tmp, this->_lista, sizeof(Contacto) * cont);
-        operator delete[](this->_lista);
+        // memcpy(tmp, this->_lista, sizeof(Contacto) * cont);
+        copy(_lista, _lista + cont, tmp);
+        //operator delete[](this->_lista);
+        delete[](this->_lista);
         this->_lista = tmp;
     }
     else
@@ -59,7 +70,8 @@ void Agenda::agregar(Contacto contacto)
         this->_lista = tmp;
     }
     // Copiamos el contacto a la lista
-    memcpy(this->_lista + cont, &contacto, sizeof(Contacto));
+    copy(&contacto, (&contacto) + 1, _lista + cont);
+    // memcpy(this->_lista + cont, &contacto, sizeof(Contacto));
     cont++; // Sumamos uno
 }
 

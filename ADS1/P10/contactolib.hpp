@@ -18,6 +18,7 @@ namespace agenda
         string apodo;
 
     public:
+        Contacto();
         Contacto(string nombre, string numero,
                  string apodo = "", string correo = "");
 
