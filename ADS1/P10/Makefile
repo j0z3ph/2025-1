@@ -11,7 +11,7 @@ run: $(APP)
 	./$(APP)
 
 $(APP): $(MAIN) $(TOOLS_H) $(AGENDA_H) $(TOOLS_OBJ) $(AGENDA_OBJ)
-	g++ -std=c++11 $(MAIN) $(TOOLS_OBJ) $(AGENDA_OBJ) -o $(APP)
+	g++ -std=c++11 -S -C $(MAIN) $(TOOLS_OBJ) $(AGENDA_OBJ) -o $(APP)
 
 $(TOOLS_OBJ): $(TOOLS)
 	g++ -c $(TOOLS) -o $(TOOLS_OBJ)

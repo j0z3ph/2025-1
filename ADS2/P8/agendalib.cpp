@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "agendalib.hpp"
 
 using namespace std;
@@ -44,13 +45,16 @@ void Agenda::agregar(Contacto contacto)
     if (_cont == 0)
     {
         _lista = new Contacto[1];
-        memcpy(_lista, &contacto, sizeof(Contacto));
+        //memcpy(_lista, &contacto, sizeof(Contacto));
+        copy(&contacto, (&contacto) + 1, _lista);
     }
     else
     {
         Contacto *tmp = new Contacto[_cont + 1];
-        memcpy(tmp, _lista, sizeof(Contacto) * _cont);
-        memcpy(tmp + _cont, &contacto, sizeof(Contacto));
+        copy(_lista, _lista + _cont, tmp);
+        copy(&contacto, (&contacto) + 1, tmp + _cont);
+        // memcpy(tmp, _lista, sizeof(Contacto) * _cont);
+        // memcpy(tmp + _cont, &contacto, sizeof(Contacto));
         delete[] _lista;
         _lista = tmp;
     }

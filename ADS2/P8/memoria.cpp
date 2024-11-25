@@ -15,7 +15,6 @@ using namespace std;
 
 int main()
 {
-
     // int *entero = (int *)malloc(4);
     int *entero = (int *)calloc(1, sizeof(int));
     *entero = 10;
