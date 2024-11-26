@@ -10,6 +10,7 @@
  */
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "tools.hpp"
 
 using namespace std;
@@ -61,14 +62,17 @@ public:
         if (contador == 0)
         {
             this->lista = new Contacto[contador + 1];
-            memcpy(this->lista, &contacto, sizeof(Contacto));
+            copy(&contacto, (&contacto) + 1, this->lista);
+            //memcpy(this->lista, &contacto, sizeof(Contacto));
             this->contador++;
         }
         else
         {
             Contacto *tmp = new Contacto[contador + 1];
-            memcpy(tmp, this->lista, sizeof(Contacto) * this->contador);
-            memcpy(tmp + 1, &contacto, sizeof(Contacto));
+            copy(this->lista, lista + contador, tmp);
+            //memcpy(tmp, this->lista, sizeof(Contacto) * this->contador);
+            copy(&contacto, &contacto+1, tmp + contador);
+            //memcpy(tmp + 1, &contacto, sizeof(Contacto));
             delete[] this->lista;
             this->lista = tmp;
             this->contador++;
