@@ -34,7 +34,12 @@ int main()
     printf("%c\n", e.caracter);
     e.doble = 2.5;
     printf("%lf\n", e.doble);
-    
+    e.entero = 10;
+    printf("%i\n", e.entero);
+    printf("%lf\n", e.doble);
+    e.flotante = 5.6f;
+    printf("%f\n", e.flotante);
+    printf("%c\n", e.caracter);
 
     Union u;
     printf("%lu\n", sizeof(Union));
@@ -42,6 +47,12 @@ int main()
     printf("%c\n", u.caracter);
     u.doble = 2.5;
     printf("%lf\n", u.doble);
+    u.entero = 10;
+    printf("%i\n", u.entero);
+    printf("%lf\n", u.doble);
+    u.flotante = 5.6f;
+    printf("%f\n", u.flotante);
+    printf("%c\n", u.caracter);
 
     return 0;
 }
