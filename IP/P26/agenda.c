@@ -12,103 +12,61 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tools.h"
+#include "diegolib.h"
 
-typedef struct Contacto
-{
-    char nombre[100];
-    char numero[20];
-    char apodo[50];
-    char correo[50];
-} Contacto;
-
-void agregar(Contacto **lista, int *contador, Contacto contacto)
-{
-    if (*lista == NULL)
-    {
-        // La lista esta vacia
-        *lista = (Contacto *)malloc(sizeof(Contacto));
-        memcpy(*lista, &contacto, sizeof(Contacto));
-        (*contador)++;
-    }
-    else
-    {
-        // Ya tenemos al menos un elemento
-        *lista = realloc(*lista, sizeof(Contacto) * (*contador + 1));
-        memcpy(*lista + *contador, &contacto, sizeof(Contacto));
-        (*contador)++;
-    }
-}
-
-int listar(Contacto *lista, int contador)
-{
-    char *arr[contador];
-    int opc = 0;
-    for (int i = 0; i < contador; i++)
-    {
-        char *tmp = (char *)malloc(sizeof(char) * 200);
-        sprintf(tmp, "%s - %s - %s",
-                lista[i].nombre, lista[i].apodo, lista[i].numero);
-        arr[i] = tmp;
-    }
-    opc = showMenu(contador, arr, "Seleccione un contacto");
-
-    for (int i = 0; i < contador; i++)
-    {
-        free(arr[i]);
-    }
-
-    return opc;
-}
 
 int main()
 {
     Contacto *lista = NULL;
     int contador = 0;
+    Contacto c;
+    int idx;
 
-    char *opciones[] = {"Agregar", "Llamar", "Listar", "Salir"};
+    char *opciones[] = {"Agregar", "Llamar", "Listar", "Eliminar", "Salir"};
     int seleccion;
 
     do
     {
-        seleccion = showMenu(4, opciones, "Agenda de Contactos");
+        seleccion = showMenu(5, opciones, "Agenda de Contactos");
         if (seleccion == 0)
         {
             // Agregar
-            Contacto c;
-            strcpy(c.nombre, "Sebastian Huerta");
-            strcpy(c.apodo, "Tripoide");
-            strcpy(c.numero, "1234567");
-            strcpy(c.correo, "tripoide@sebas.com");
-            agregar(&lista, &contador, c);
+            printf("Ingrese el nombre: ");
+            fgets(c.nombre, 100, stdin);
+            c.nombre[strlen(c.nombre) - 1] = '\0';
+            printf("Ingrese el apodo: ");
+            fgets(c.apodo, 50, stdin);
+            c.apodo[strlen(c.apodo) - 1] = '\0';
+            printf("Ingrese el numero: ");
+            fgets(c.numero, 20, stdin);
+            c.numero[strlen(c.numero) - 1] = '\0';
+            printf("Ingrese el correo: ");
+            fgets(c.correo, 50, stdin);
+            c.correo[strlen(c.correo) - 1] = '\0';
 
-            strcpy(c.nombre, "Rodrigo Cuesta");
-            strcpy(c.apodo, "Chino Cochino");
-            strcpy(c.numero, "8763487653");
-            strcpy(c.correo, "chino@cochino.mx");
-            
             agregar(&lista, &contador, c);
-
-            strcpy(c.nombre, "Patricio Duran");
-            strcpy(c.apodo, "Pato");
-            strcpy(c.numero, "4343123");
-            strcpy(c.correo, "pato@cuak.com");
-            
-            agregar(&lista, &contador, c);
-
         }
         if (seleccion == 1)
         {
             // Lamar
+            idx = listar(lista, contador);
+            llamar(lista, contador, idx);
         }
         if (seleccion == 2)
         {
             // Listar
-            listar(lista, contador);
+            listar2(lista, contador);
+        }
+        if (seleccion == 3)
+        {
+            // eliminar
+            idx = listar(lista, contador);
+            eliminar(&lista, &contador, idx);
         }
 
         pausa();
 
-    } while (seleccion != 3);
+    } while (seleccion != 4);
 
     return 0;
 }
