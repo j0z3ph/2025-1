@@ -1,3 +1,6 @@
+using HolaMundo.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace HolaMundo
 {
     public class Program
@@ -8,6 +11,12 @@ namespace HolaMundo
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // DB service
+            builder.Services.AddDbContext<Example2Context>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("LaConexionChida")));
+
+
 
             var app = builder.Build();
 
