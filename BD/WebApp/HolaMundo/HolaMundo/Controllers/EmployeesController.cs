@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HolaMundo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HolaMundo.Controllers {
+    [Authorize]
     public class EmployeesController : Controller {
         private readonly Example2Context _context;
 

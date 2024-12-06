@@ -1,5 +1,7 @@
 using HolaMundo.Models;
 using Microsoft.EntityFrameworkCore;
+using HolaMundo.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace HolaMundo
 {
@@ -15,6 +17,11 @@ namespace HolaMundo
             // DB service
             builder.Services.AddDbContext<Example2Context>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("LaConexionChida")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(
+                options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<Example2Context>();
 
 
 
@@ -38,6 +45,7 @@ namespace HolaMundo
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
 
             app.Run();
         }

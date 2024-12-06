@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HolaMundo.Models;
 
-public partial class Example2Context : DbContext
+public partial class Example2Context : IdentityDbContext<IdentityUser>
 {
     public Example2Context()
     {
@@ -25,6 +27,7 @@ public partial class Example2Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.UseCollation("Latin1_General_CI_AI");
 
         modelBuilder.Entity<Customer>(entity =>
