@@ -4,7 +4,7 @@ import face_recognition
 import pickle
 import os
 
-capture = cv2.VideoCapture(1)
+capture = cv2.VideoCapture(0)
 trainedEncodings = []  # to store encodings
 trainedIDs = []  # to store ids
 cont = 0  # face image counter

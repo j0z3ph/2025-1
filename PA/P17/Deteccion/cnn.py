@@ -2,7 +2,7 @@ import dlib
 import cv2
 import os
 
-capture = cv2.VideoCapture(1)
+capture = cv2.VideoCapture(0)
 # load dlib's CNN face detector
 model = "mmod_human_face_detector.dat"  # model file name
 

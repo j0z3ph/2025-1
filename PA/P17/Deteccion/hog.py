@@ -1,7 +1,7 @@
 import dlib
 import cv2
 
-capture = cv2.VideoCapture(1)
+capture = cv2.VideoCapture(0)
 # load dlib's HOG + Linear SVM face detector
 detector = dlib.get_frontal_face_detector()
 

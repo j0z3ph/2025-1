@@ -3,7 +3,7 @@ import face_recognition
 import pickle
 import os
 
-capture = cv2.VideoCapture(1)
+capture = cv2.VideoCapture(0)
 FACEDB = "facedatabase.dat"  # name of the database
 
 file_dir = os.path.dirname(os.path.realpath(__file__))
