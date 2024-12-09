@@ -7,19 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HolaMundo.Models;
 using Microsoft.AspNetCore.Authorization;
+using HolaMundo.Tools;
 
 namespace HolaMundo.Controllers {
     [Authorize]
     public class CustomersController : Controller {
         private readonly Example2Context _context;
+        private const int pagesize = 5;
 
         public CustomersController(Example2Context context) {
             _context = context;
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index() {
-            return View(await _context.Customers.ToListAsync());
+        public async Task<IActionResult> Index(int? pageNumber) {
+            var lista = from customer in _context.Customers select customer;
+            return View(await PaginatedList<Customer>.CreateAsync(lista.AsNoTracking(), pageNumber ?? 1, pagesize));
+            //return View(await _context.Customers.ToListAsync());
         }
 
         // GET: Customers/Details/5

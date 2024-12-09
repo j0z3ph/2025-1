@@ -1,4 +1,5 @@
-﻿@model IEnumerable<HolaMundo.Models.Customer>
+﻿@using HolaMundo.Tools
+@model PaginatedList<HolaMundo.Models.Customer>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,13 +15,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MiddleInitial)
+                @Html.DisplayNameFor(model => model[0].MiddleInitial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model[0].LastName)
             </th>
             <th></th>
         </tr>
@@ -46,3 +47,19 @@
 }
     </tbody>
 </table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
