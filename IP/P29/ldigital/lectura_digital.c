@@ -17,10 +17,12 @@ int main()
 	if (isConnected(&arduino))
 		printf("\nConectado al puerto %s\n", portName);
 	
-	while (isConnected(&arduino) && command[0] != 'q') {
-		readSerialPort(response, MAX_DATA_LENGTH, &arduino);
-		puts(response);
+	while (isConnected(&arduino)) {
+		// Leemos el boton
+		strcpy(command, "btn\n");
+		writeSerialPort(command, strlen(command), &arduino);
 		Sleep(1);
+		readSerialPort(response, MAX_DATA_LENGTH, &arduino);
 		if (response[0] == '1') {
 			strcpy(command, "on\n");
 			writeSerialPort(command, strlen(command), &arduino);

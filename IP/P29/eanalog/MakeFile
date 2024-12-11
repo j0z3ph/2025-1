@@ -1,0 +1,11 @@
+APP = app.exe
+EXECCMD = ./$(APP)
+MAIN = escritura_analog.c
+SERIALLIB = serial.c
+COMPILER = gcc
+
+all: $(APP)
+	$(EXECCMD)
+
+$(APP): $(MAIN) $(SERIALLIB)
+	$(COMPILER) $(MAIN) $(SERIALLIB) -o $(APP)

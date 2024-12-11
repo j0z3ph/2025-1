@@ -1,26 +1,21 @@
 #define BAUD 115200
 #define led 2
-#define button 13
+#define analog 13
 
 String receivedString;
-int buttonState = 0;
+int sensorValue = 0;
 
 void setup() {
   Serial.begin(BAUD);
   pinMode(led, OUTPUT);
-  pinMode(button, INPUT);
 }
 
 void loop() {
   if (Serial.available() > 0) {
     receivedString = Serial.readStringUntil('\n');
-    if (receivedString.equals("btn")) {
-      buttonState = digitalRead(button);
-      if (buttonState == HIGH) {
-        Serial.write("1\n");
-      } else {
-        Serial.write("0\n");
-      }
+    if (receivedString.equals("analog")) {
+      sensorValue = analogRead(analog);
+      Serial.println(sensorValue);
     }
     if (receivedString.equals("on") || receivedString.equals("ON")) {
       digitalWrite(led, HIGH);
