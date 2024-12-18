@@ -9,26 +9,46 @@
  * 
  */
 #include "miniwin.h"
+#include "serial.h"
 #define GRAVEDAD 1
+#define CX 3180
+#define CY 3165
 
 int main()
 {
-    int t;
-    float x,y;
-    bool fc = false;
+    int t, _x, _y;
+    float x = 100,y = 100;
+    bool fc = false, boton = false;
     bool ip = false, dp = false;
     float xc=100, yc=100;
     float aceleracion = 0;
+    char comando[MAX_DATA_LENGTH];
+    char respuesta[MAX_DATA_LENGTH];
     MiniWinImage *link = creaImagenYMascaraBMP("zelda.bmp","zeldam.bmp"); 
     titulo("M primer ventana");
     ventana(800, 600);
+
+
+    // Serial
+    SerialPort control = initSerialPort("COM4", B115200);
+
 
     color_fondo_rgb(9, 208, 27);
     //fullscreen(true);
     t = tecla();
     while(t != ESCAPE) {
         t = tecla();
-        raton(&x, &y);
+        //raton(&x, &y);
+
+        // Leo los valor del control
+        sprintf(comando, "read\n");
+        writeSerialPort(comando, strlen(comando), &control);
+        readSerialPort(respuesta, MAX_DATA_LENGTH, &control);
+
+        _x = atoi(respuesta) - CX;
+        _y = atoi(respuesta + 5) - CY;
+        boton = respuesta[10] == '1' ? false : true;
+
 
         aceleracion += GRAVEDAD;
         yc+=aceleracion;
@@ -63,6 +83,12 @@ int main()
 
         borra();
 
+        _x = _x >=0 ? (_x * 20) /(4096-CX) : (_x * 20) /(CX);
+        _y = _y >=0 ? (_y * 20) /(4096-CY) : (_y * 20) /(CY);
+        x+= _x;
+        y+= _y;
+        sprintf(comando, "%i-%i", _x, _y);
+        texto(10,10, comando);
         color(NEGRO);
         circulo_lleno(x,y, 10);
         circulo(x,y, 20);
@@ -72,6 +98,9 @@ int main()
         linea(x, y+30, x, y+5);
         color(ROJO);
         if(raton_boton_izq()) {
+            textoExt(x+10,y-30,"Poww",40, false, true, false, "Comic Sans MS");
+        }
+        if(boton) {
             textoExt(x+10,y-30,"Poww",40, false, true, false, "Comic Sans MS");
         }
 
